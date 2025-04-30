@@ -1,6 +1,6 @@
 import LinkedList from "./linked-list.js";
 
-class HashMap {
+class HashSet {
   constructor(loadFactor, capacity = 16) {
     this.loadFactor = loadFactor;
     this.capacity = capacity;
@@ -19,7 +19,7 @@ class HashMap {
       if (!bucket) continue;
 
       const node = bucket.at(0);
-      this.set(node.key, node.value);
+      this.set(node.key);
     }
   }
 
@@ -34,7 +34,7 @@ class HashMap {
     return hashCode;
   }
 
-  set(key, value) {
+  set(key) {
     // Increases array capacity if it reaches the load factor for the capacity set
     if (this.count >= Math.round(this.loadFactor * this.capacity))
       this.#expand();
@@ -45,7 +45,7 @@ class HashMap {
     if (!this.buckets[index]) this.buckets[index] = new LinkedList();
     else this.buckets[index].pop();
 
-    this.buckets[index].append(key, value);
+    this.buckets[index].append(key);
     this.count++;
   }
 
@@ -97,59 +97,4 @@ class HashMap {
 
     console.log(string);
   }
-
-  values() {
-    if (!this.buckets) {
-      console.log("Hash map is empty");
-      return;
-    }
-
-    let string = `[`;
-    for (const bucket of this.buckets) {
-      if (!bucket) continue;
-      string += ` ${bucket.at(0).value}, `;
-    }
-
-    string = string.substring(0, string.length - 2);
-    string += `]`;
-
-    console.log(string);
-  }
-
-  entries() {
-    if (!this.buckets) {
-      console.log("Hash map is empty");
-      return;
-    }
-
-    let string = `[`;
-    for (const bucket of this.buckets) {
-      if (!bucket) continue;
-      string += `[${bucket.at(0).key}, ${bucket.at(0).value}], `;
-    }
-
-    string = string.substring(0, string.length - 2);
-    string += `]`;
-
-    console.log(string);
-  }
 }
-
-const test = new HashMap(0.75);
-test.set("apple", "red");
-test.set("banana", "yellow");
-test.set("carrot", "orange");
-test.set("dog", "brown");
-test.set("elephant", "gray");
-test.set("frog", "green");
-test.set("grape", "purple");
-test.set("hat", "black");
-test.set("ice cream", "white");
-test.set("jacket", "blue");
-test.set("kite", "pink");
-test.set("lion", "golden");
-test.set("moon", "silver");
-test.set("mango", "strawberry");
-
-test.clear();
-test.entries();
