@@ -84,11 +84,11 @@ class Hashmap {
     let string = `[`;
     for (const bucket of this.buckets) {
       if (!bucket) continue;
-      string += ` ${bucket.at(0).key},`;
+      string += ` ${bucket.at(0).key}, `;
     }
 
-    string = string.substring(0, string.length - 1);
-    string += ` ]`;
+    string = string.substring(0, string.length - 2);
+    string += `]`;
 
     console.log(string);
   }
@@ -97,11 +97,11 @@ class Hashmap {
     let string = `[`;
     for (const bucket of this.buckets) {
       if (!bucket) continue;
-      string += ` ${bucket.at(0).value},`;
+      string += ` ${bucket.at(0).value}, `;
     }
 
-    string = string.substring(0, string.length - 1);
-    string += ` ]`;
+    string = string.substring(0, string.length - 2);
+    string += `]`;
 
     console.log(string);
   }
@@ -110,11 +110,11 @@ class Hashmap {
     let string = `[`;
     for (const bucket of this.buckets) {
       if (!bucket) continue;
-      string += ` [${bucket.at(0).key}, ${bucket.at(0).value}],`;
+      string += `[${bucket.at(0).key}, ${bucket.at(0).value}], `;
     }
 
-    string = string.substring(0, string.length - 1);
-    string += ` ]`;
+    string = string.substring(0, string.length - 2);
+    string += `]`;
 
     console.log(string);
   }
@@ -136,5 +136,4 @@ test.set("lion", "golden");
 test.set("moon", "silver");
 test.set("mango", "strawberry");
 
-test.get("lion");
-test.get("grape");
+test.entries();
